@@ -26,6 +26,14 @@ a {
       flex: 1 0 auto;
     }
   }
+  #content-wrapper-hub {
+    background-color: $gray-100;
+    width: 100%;
+    overflow-x: hidden;
+    #content {
+      flex: 1 0 auto;
+    }
+  }
 }
 
 // Set container padding to match gutter width instead of default 15px
