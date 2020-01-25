@@ -16,6 +16,7 @@ const uglify = require("gulp-uglify");
 const babel = require("gulp-babel");
 const concat = require('gulp-concat');
 const nodemon = require('gulp-nodemon');
+const replace = require('gulp-replace');
 
 // Load package.json for banner
 const pkg = require('./package.json');
@@ -67,6 +68,8 @@ function modules() {
     .pipe(gulp.dest('./public/vendor/vanilla-router'));
   var Handlebars = gulp.src('./node_modules/handlebars/dist/*.js')
     .pipe(gulp.dest('./public/vendor/handlebars'));
+  var socketio = gulp.src('./node_modules/socket.io-client/dist/*.js')
+    .pipe(gulp.dest('./public/vendor/socket.io-client'));
 
   // dataTables
   var dataTables = gulp.src([
@@ -87,7 +90,7 @@ function modules() {
       '!./node_modules/jquery/dist/core.js'
     ])
     .pipe(gulp.dest('./public/vendor/jquery'));
-  return merge(bootstrapJS, bootstrapSCSS, chartJS, dataTables, fontAwesome, jquery, jqueryEasing,routerJS, Handlebars);
+  return merge(bootstrapJS, bootstrapSCSS, chartJS, dataTables, fontAwesome, jquery, jqueryEasing,routerJS, Handlebars, socketio);
 }
 
 // CSS task
@@ -122,6 +125,7 @@ function js() {
       './js/*.js',
       '!./js/*.min.js',
     ])
+    .pipe(replace('SERVER_PORT', process.env.SERVER_PORT))
     .pipe(babel(
       {presets: ['@babel/env']}
     ))

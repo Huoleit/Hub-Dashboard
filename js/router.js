@@ -26,6 +26,9 @@ window.addEventListener('load', () => {
     router.add('/hub', function () {
         let hub = hubTemplate();
         el.html(hub);
+        $.get(window.location.protocol +"//"+ window.location.host+'/api/record',(data,status)=>{
+            console.log('Get ' + data);
+        });
         addListener(router);
         console.log('Hub');
     });

@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 
 const faker = require('faker');
 const Redis = require('ioredis');
-// const redis = new Redis('redis://127.0.0.1:6379');
+const redis = new Redis('redis://127.0.0.1:6379');
 const router = express.Router();
 
 const port = process.env.SERVER_PORT || 8000;
@@ -71,14 +71,22 @@ router.route('/hubinfo')
     console.log(req.body);
     res.json({data:req.body.status});
 });
-// router.route('/record')
-// .post(async (req,res) => { 
-   
-//     hub.set_status(Device.ON);
-//     hub.set_info(req.body);
-//     console.log(req.body);
-//     res.json({data:req.body.status});
-// });
+router.route('/record')
+.post(async (req,res) => { 
+    
+    
+    await redis.rpush('records', JSON.stringify(req.body));
+    io.emit('update_record', Array(req.body));
+    console.log(Array(req.body));
+    res.json({status:'OK', method:'POST'});
+
+}).get(async (req,res) => { 
+    
+    const redis_records = await redis.lrange('records',0,-1);
+    const records = redis_records.map(JSON.parse);
+    io.emit('update_record', records);
+    res.json({status:'OK', method:'GET'});
+});
 
 const broadcastTimer = setInterval(() => {
     hub.update();
