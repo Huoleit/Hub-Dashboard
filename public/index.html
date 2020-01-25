@@ -27,7 +27,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/" hasListen='false'>
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-tree"></i>
         </div>
@@ -39,12 +39,12 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <div class="nav-link">
           <!-- <i class="fas fa-fw fa-tachometer-alt"></i> -->
           <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60"> 
           <!-- user img -->
-          <span class="ml-2">Mrs. Lam</span>
-        </a>
+          <span class="ml-2" id="name-anchor">Mrs. Lam</span>
+        </div>
       </li>
 
       <!-- Divider -->
@@ -52,10 +52,10 @@
 
       <!-- Heading -->
        <li class="nav-item">
-        <a class="nav-link collapsed" href="javascript:void(0)">
+        <div class="nav-link collapsed">
           <i>Age</i>
-          <span><b>65</b></span>
-        </a>
+          <span><b id="age-anchor">65</b></span>
+        </div>
       </li>
       <!-- Divider -->
       <hr class="sidebar-divider">
@@ -63,34 +63,20 @@
       <!-- Heading -->
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="javascript:void(0)">
+        <div class="nav-link collapsed">
           <i>City</i>
-          <span>New York</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="buttons.html">Buttons</a>
-            <a class="collapse-item" href="cards.html">Cards</a>
-          </div>
+          <span id="city-anchor">New York</span>
         </div>
+        
       </li>
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="javascript:void(0)">
+        <div class="nav-link collapsed">
           <i>Job</i>
-          <span>Actor</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">Colors</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
-          </div>
+          <span id="job-anchor">Actor</span>
         </div>
+      
       </li>
 
       <!-- Divider -->
@@ -102,9 +88,10 @@
       </div>
       <!-- Nav Item - Charts -->
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/hub" hasListen='false'>
           <i class="fas fa-tree"></i>
-          <span>Hub</span></a>
+          <span>Hub</span>
+        </a>
       </li>
 
       <!-- Nav Item - Pages Collapse Menu -->
@@ -116,7 +103,7 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Devices</h6>
-            <a class="collapse-item" href="hub">1</a>
+            <a class="collapse-item" href="/hub" hasListen='false'>1</a>
           </div>
         </div>
       </li>
@@ -155,7 +142,7 @@
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
-                  <a href="#" class="card-link">
+                  <a href="/hub" class="card-link" hasListen='false'>
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Hub status</div>
@@ -244,7 +231,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Daild Active Time</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Daily Active Time</h6>
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -331,7 +318,74 @@
     </div>
   </script>
   <script id="hub-template" type="text/x-handlebars-template">
-    
+    <div class="container-fluid mt-5">
+      <!-- Page Heading -->
+      <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h1 mb-0 text-gray-800" >Hub Status</h1>
+      </div>
+      <div class="row">
+        <div class="col-xl-4 d-none d-xl-block py-3 px-3">
+          <img src="img/tree-solid.svg" class="mt-3"/>
+        </div>
+        <div class="col-xl-8 col-md-12">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xl-6 col-md-12 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                  <div class="card-body">
+                    <a href="/hub" class="card-link" hasListen='false'>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Hub status</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800 text-uppercase">Connected</div>
+                        </div>
+                        <div class="col-auto">
+                          <i class="fas fa-plug fa-2x text-gray-300"></i>
+                        </div>
+                      </div>
+        
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-6 col-md-12 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                  <div class="card-body">
+                    <a href="/hub" class="card-link">
+                      <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Hub status</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800 text-uppercase">Connected</div>
+                        </div>
+                        <div class="col-auto">
+                          <i class="fas fa-plug fa-2x text-gray-300"></i>
+                        </div>
+                      </div>
+        
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body overflow-auto" style="min-height: 22em; max-height: 22em;">
+                    <span class="d-block">asfasfasfasfas
+                      dvsdv
+                    </span>
+                    <span class="d-block">asfasfasfasfas</span>
+                    <span class="d-block">asfasfasfasfas</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
   </script>
 
   <!-- Bootstrap core JavaScript-->
@@ -342,7 +396,7 @@
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="vendor/vanilla-router/vanilla-router.min.js"></script>
   <script src="vendor/handlebars/handlebars.min.js"></script>
-
+  <script src="vendor/socket.io-client/socket.io.slim.js"></script>
   <script src="vendor/chart.js/Chart.min.js"></script>
 
   <!-- Page level custom scripts -->
