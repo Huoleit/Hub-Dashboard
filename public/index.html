@@ -132,7 +132,7 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="/goal" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Set Goals</a>
+            <a href="/goal" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" hasListen='false'><i class="fas fa-download fa-sm text-white-50"></i> Set Goals</a>
           </div>
 
           <!-- Content Row -->
@@ -187,11 +187,11 @@
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">monthly progress</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="progress-text">50%</div>
                         </div>
                         <div class="col">
                           <div class="progress progress-sm mr-2">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" id="progress-bar"></div>
                           </div>
                         </div>
                       </div>
@@ -211,7 +211,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Last active time</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="last-active-time">0</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -324,10 +324,10 @@
         <h1 class="h1 mb-0 text-gray-800" >Hub Status</h1>
       </div>
       <div class="row">
-        <div class="col-xl-4 d-none d-xl-block py-3 px-3">
+        <div class="col-lg-4 d-none d-lg-block py-3 px-3">
           <img src="img/tree-solid.svg" class="mt-3"/>
         </div>
-        <div class="col-xl-8 col-md-12">
+        <div class="col-lg-8 col-md-12">
           <div class="container-fluid">
             <div class="row">
               <div class="col-xl-6 col-md-12 mb-4">
@@ -386,6 +386,69 @@
       </div>
     </div>
 
+  </script>
+
+  <script id="goal-template" type="text/x-handlebars-template">
+    <div class="container-fluid mt-5">
+      <!-- Page Heading -->
+     
+      <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h1 mb-0 text-gray-800" >Set Goals</h1>
+      </div>
+      <div id='alert-wrapper'></div>
+      <div class="row">
+        <div class="col-12">
+          <form>
+            <div id="input-wrapper">
+              <div class="form-row" id="base-input-row">
+                <div class="form-group col-3">
+                  <label for="inputState">Activity</label>
+                  <select id="inputState" class="form-control">
+                    <option value='1'  selected>Moving</option>
+                    <option value='2'>Jumping</option>
+                  </select>
+                </div>
+                <div class="form-group col-3 col-lg-2 ml-lg-5">
+                  <label>Hour</label>
+                  <input type="number" class="form-control" placeholder="Hour">
+                </div>
+                <div class="form-group col-3 col-lg-2">
+                  <label>Minute</label>
+                  <input type="number" class="form-control" placeholder="Minute">
+                </div>
+                <div class="form-group col-3 col-lg-2">
+                  <label>Second</label>
+                  <input type="number" class="form-control" placeholder="Second">
+                </div>
+              </div>
+
+            </div>
+            <div class="form-row">
+              <div class="form-group col-1">
+                <a href='#' class="btn btn-primary btn-circle btn-sm" id="add-activity">
+                  <i class="fas fa-plus"></i>
+                </a>
+              </div>
+              <div class="form-group col-1">
+                <a href='#' class="btn btn-primary btn-circle btn-sm" id="del-activity">
+                    <i class="fas fa-minus"></i>
+                </a>
+              </div>
+              <div class="form-group col-3 ml-auto">
+                <button class="btn btn-primary" type="button" id="submit-button">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+
+  </script>
+  <script id="alert-template" type="text/x-handlebars-template">
+    <div class="alert alert-{{type}}" role="alert">
+      {{msg}}
+   </div>
   </script>
 
   <!-- Bootstrap core JavaScript-->

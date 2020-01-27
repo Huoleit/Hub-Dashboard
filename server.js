@@ -77,7 +77,7 @@ router.route('/record')
     
     await redis.rpush('records', JSON.stringify(req.body));
     io.emit('update_record', Array(req.body));
-    console.log(Array(req.body));
+    update_progress();
     res.json({status:'OK', method:'POST'});
 
 }).get(async (req,res) => { 
@@ -85,6 +85,26 @@ router.route('/record')
     const redis_records = await redis.lrange('records',0,-1);
     const records = redis_records.map(JSON.parse);
     io.emit('update_record', records);
+    res.json({status:'OK', method:'GET'});
+});
+
+router.route('/goal')
+.post(async (req,res) => { 
+    
+    let records = {};
+    for(let record of req.body.data)
+    {
+        records[record.id] = record.total_time;
+    }
+    console.log(records);
+    await redis.set('schema',JSON.stringify(records));
+    schema = records;
+    res.json({status:'OK', method:'POST'});
+
+})
+.get(async (req,res) => { 
+    
+    update_progress();
     res.json({status:'OK', method:'GET'});
 });
 
@@ -115,3 +135,59 @@ io.on('connection',(socket) => {
     socket.emit('update_userinfo',user);
     
 });
+
+const update_progress = async ()=>{
+    let schema = await redis.get('schema');
+    schema = JSON.parse(schema);
+    let redis_records = await redis.lrange('records',0,-1);
+    let records = redis_records.map(JSON.parse);
+    let progress = 0;
+    let goal_time = 0;
+    let done_time = 0;
+    let activeTimeObj = {};
+
+    let time_a = schema ? Object.values(schema) : null;
+    if(time_a)
+    {
+        for(let s of time_a)
+        {
+            if(!isNaN(s))
+                goal_time += s;
+        }
+    }
+    if(records)
+    {
+        for(let record of records)
+        {
+            if(record && record.activityID in schema)
+            {
+                if(!isNaN(record.LastingTime))
+                    done_time += record.LastingTime;
+            }
+    
+            if(record)
+            {
+                let key = record.timeStamp.split(" ")[0];
+                if(!activeTimeObj[key]) 
+                    activeTimeObj[key] = record.LastingTime;
+                else
+                    activeTimeObj[key] += record.LastingTime;
+            }
+    
+        }
+
+    }
+    if(goal_time === 0) progress = 100;
+    else{
+        progress = Math.round(done_time*100/goal_time);
+        if(progress > 100) progress = 100;
+        else if(progress < 0) progress = 0;
+    }
+    console.log(JSON.stringify(schema) + goal_time +"  "+done_time+"  "+progress);
+    io.emit('update_progress', progress);
+    io.emit('update_chart', activeTimeObj);
+    if(records.length)
+    {
+        io.emit('update_lastActiveTime', records[records.length-1].timeStamp);
+    }
+};
