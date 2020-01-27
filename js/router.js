@@ -1,8 +1,10 @@
+var barChart = null;
 window.addEventListener('load', () => {
     const el = $('#content');
     const dashboardTemplate = Handlebars.compile($('#dashboard-template').html());
     const errorTemplate = Handlebars.compile($('#error-template').html());
     const hubTemplate = Handlebars.compile($('#hub-template').html());
+    const goalTemplate = Handlebars.compile($('#goal-template').html());
 
     const router = new Router({
     mode: 'history',
@@ -17,7 +19,16 @@ window.addEventListener('load', () => {
         let html = dashboardTemplate();
         el.html(html);
         const ctx = $('#myBarChart');
-        const barChart = createBarChart(ctx);
+        if(barChart) 
+        {
+            barChart.destroy();
+            barChart = null;
+            console.log('Des Chart')
+        }
+        barChart = createBarChart(ctx);
+        $.get(window.location.protocol +"//"+ window.location.host+'/api/goal',(data,status)=>{
+            // console.log('Get ' + data);
+        });
         addListener(router);
         console.log('Home');
 
@@ -27,10 +38,17 @@ window.addEventListener('load', () => {
         let hub = hubTemplate();
         el.html(hub);
         $.get(window.location.protocol +"//"+ window.location.host+'/api/record',(data,status)=>{
-            console.log('Get ' + data);
+            // console.log('Get ' + data);
         });
         addListener(router);
         console.log('Hub');
+    });
+    router.add('/goal', function () {
+        let html = goalTemplate();
+        el.html(html);
+        addListener(router);
+        addButtonListener();
+        // console.log('Goal');
     });
 
     router.navigateTo(window.location.pathname);
@@ -44,7 +62,7 @@ const addListener = (router) => {
         const href = target.attr('href');
 
         const path = href.substr(href.lastIndexOf('/'));
-        console.log('path: ' + path);
+        // console.log('path: ' + path);
         router.navigateTo(path);
     }).attr('hasListen', 'true');
 

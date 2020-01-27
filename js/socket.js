@@ -48,7 +48,7 @@ socket.on('update_record',(records_array) => {
     
     for(let record of records_array)
     {
-        console.log(record);
+        // console.log(record);
         let time = record.timeStamp;
         
         let id = record.activityID;
@@ -62,3 +62,30 @@ socket.on('update_record',(records_array) => {
     
 });
 
+socket.on('update_progress',(progress) => {
+    // console.log(progress);
+    $("#progress-text").text(progress+'%');
+    $("#progress-bar").css({'width': progress+'%'});
+});
+
+socket.on('update_lastActiveTime',(time) => {
+    
+    $("#last-active-time").text(time.split(" ")[1]);
+});
+
+socket.on('update_chart',(obj) => {
+    barChart.data.datasets.forEach((dataset) => {
+        for(let label of barChart.data.labels)
+        {
+            dataset.data.pop();
+        }
+        for(let label of barChart.data.labels)
+        {
+            
+            let data_in = obj[label] ?? 0;
+            dataset.data.push(data_in);
+        }
+    });
+    barChart.update();
+    
+});

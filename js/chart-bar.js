@@ -30,16 +30,27 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 // Bar Chart Example
 
 // var ctx = document.getElementById("myBarChart");
-const createBarChart = (ctx) => new Chart(ctx, {
+const createBarChart = (ctx) => {
+  let dt = new Date();
+  
+  let labels = [];
+  for(let i = -5; i <= 0;i++)
+  {
+    let now = new Date();
+    dt.setDate(now.getDate() + i);
+    labels.push(dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate());
+  }
+
+  return new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ["January", "February", "March", "April", "May", "June"],
+    labels: labels,
     datasets: [{
-      label: "Revenue",
+      label: "Time",
       backgroundColor: "#4e73df",
       hoverBackgroundColor: "#2e59d9",
       borderColor: "#4e73df",
-      data: [4215, 5312, 6251, 7841, 9821],
+      data: [1000, 0, 0, 0, 0, 0],
     }],
   },
   options: {
@@ -55,7 +66,7 @@ const createBarChart = (ctx) => new Chart(ctx, {
     scales: {
       xAxes: [{
         time: {
-          unit: 'month'
+          unit: 'Date'
         },
         gridLines: {
           display: false,
@@ -69,12 +80,12 @@ const createBarChart = (ctx) => new Chart(ctx, {
       yAxes: [{
         ticks: {
           min: 0,
-          max: 15000,
+          max: 3000,
           maxTicksLimit: 5,
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
-            return '$' + number_format(value);
+            return number_format(value) + 's';
           }
         },
         gridLines: {
@@ -104,9 +115,9 @@ const createBarChart = (ctx) => new Chart(ctx, {
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+          return datasetLabel + ': ' + number_format(tooltipItem.yLabel) + 's';
         }
       }
     },
   }
-});
+})};
