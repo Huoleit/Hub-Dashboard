@@ -3,3 +3,6 @@ template
 public/css
 public/js
 public/vendor
+.DS_Store
+hub.py
+public/buttons.html
