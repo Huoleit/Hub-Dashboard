@@ -1,10 +1,13 @@
 const update_info = (user) => {
-    $('img[class*=img-profile]').attr('src',user.avatar);
-    $('#name-anchor').text(user.name);
+    // $('img[class*=img-profile]').attr('src',user.avatar);
+    // $('#name-anchor').text(user.name);
+    $('#name-anchor').text("David");
     
     $('#age-anchor').text(user.age);
-    $('#city-anchor').text(user.city);
-    $('#job-anchor').text(user.job);
+    // $('#city-anchor').text(user.city);
+    // $('#job-anchor').text(user.job);
+    $('#city-anchor').text("New York");
+    $('#job-anchor').text("Designer");
 };
 const socket = io(window.location.hostname + ':' + SERVER_PORT);  //have to change this port
 
@@ -20,7 +23,10 @@ socket.on('update_status',(type, status) => {
         case 'hub':
             element = $("#hub-status").siblings().first();
             break;
-        
+        case 'device':
+            element = $("#device-status").siblings().first();
+            break;
+
         default: 
             element = null; 
             break;
@@ -33,11 +39,29 @@ socket.on('update_info',(type, data) => {
     switch(type)
     {
         case 'hub':
-            let element = $("div:contains('speed'):last").siblings().first();
-            if(element && data && ('speed' in data))
-                element.text(data.speed);
+            let element = $("div:contains('Leaves'):last").siblings().first();
+            if(element && data && ('leaves' in data))
+                element.text(data.leaves);
             break;
-        
+
+        case 'device':
+            element = $("div:contains('PositionX'):last").siblings().first();
+            
+            if (element && data && ('positionx' in data))
+                element.text(data.positionx);
+
+            element = $("div:contains('PositionY'):last").siblings().first();
+            
+            if (element && data && ('positiony' in data))
+                element.text(data.positiony);
+
+            element = $("#deviceLastTime").siblings().first();
+            
+            if (element && data && ('time' in data))
+                element.text(data.time);
+
+            break;
+
         default: 
             break;
     }

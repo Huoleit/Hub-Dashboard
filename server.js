@@ -55,6 +55,7 @@ class Device{
     }
 }
 let hub = new Device('hub',500);
+let device = new Device('device',500);
 
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
@@ -68,7 +69,15 @@ router.route('/hubinfo')
    
     hub.set_status(Device.ON);
     hub.set_info(req.body);
-    console.log(req.body);
+    // console.log(req.body);
+    res.json({data:req.body.status});
+});
+router.route('/deviceinfo')
+.post(async (req,res) => { 
+   
+    device.set_status(Device.ON);
+    device.set_info(req.body);
+    // console.log(req.body);
     res.json({data:req.body.status});
 });
 router.route('/record')
@@ -110,6 +119,7 @@ router.route('/goal')
 
 const broadcastTimer = setInterval(() => {
     hub.update();
+    device.update();
 },100);
 
 app.use('/api', router); 
@@ -162,16 +172,16 @@ const update_progress = async ()=>{
             if(record && record.activityID in schema)
             {
                 if(!isNaN(record.LastingTime))
-                    done_time += record.LastingTime;
+                    done_time += record.LastingTime * 1;
             }
     
             if(record)
             {
                 let key = record.timeStamp.split(" ")[0];
                 if(!activeTimeObj[key]) 
-                    activeTimeObj[key] = record.LastingTime;
+                    activeTimeObj[key] = record.LastingTime * 1;
                 else
-                    activeTimeObj[key] += record.LastingTime;
+                    activeTimeObj[key] += record.LastingTime * 1;
             }
     
         }
@@ -186,6 +196,7 @@ const update_progress = async ()=>{
     console.log(JSON.stringify(schema) + goal_time +"  "+done_time+"  "+progress);
     io.emit('update_progress', progress);
     io.emit('update_chart', activeTimeObj);
+    console.log(activeTimeObj);
     if(records.length)
     {
         io.emit('update_lastActiveTime', records[records.length-1].timeStamp);

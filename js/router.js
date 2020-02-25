@@ -5,6 +5,7 @@ window.addEventListener('load', () => {
     const errorTemplate = Handlebars.compile($('#error-template').html());
     const hubTemplate = Handlebars.compile($('#hub-template').html());
     const goalTemplate = Handlebars.compile($('#goal-template').html());
+    const deviceTemplate = Handlebars.compile($('#device-template').html());
 
     const router = new Router({
     mode: 'history',
@@ -42,6 +43,15 @@ window.addEventListener('load', () => {
         });
         addListener(router);
         console.log('Hub');
+    });
+    router.add('/device', function () {
+        let device = deviceTemplate();
+        el.html(device);
+        $.get(window.location.protocol +"//"+ window.location.host+'/api/record',(data,status)=>{
+            // console.log('Get ' + data);
+        });
+        addListener(router);
+        console.log('device');
     });
     router.add('/goal', function () {
         let html = goalTemplate();

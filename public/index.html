@@ -11,7 +11,7 @@
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"> -->
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -41,9 +41,9 @@
       <li class="nav-item active">
         <div class="nav-link">
           <!-- <i class="fas fa-fw fa-tachometer-alt"></i> -->
-          <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60"> 
+          <img class="img-profile rounded-circle" src="img/128.png"> 
           <!-- user img -->
-          <span class="ml-2" id="name-anchor">Mrs. Lam</span>
+          <span class="ml-2" id="name-anchor">Mrs. Lam</span> 
         </div>
       </li>
 
@@ -103,7 +103,7 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Devices</h6>
-            <a class="collapse-item" href="/hub" hasListen='false'>1</a>
+            <a class="collapse-item" href="/device" hasListen='false'>1</a>
           </div>
         </div>
       </li>
@@ -162,10 +162,10 @@
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
-                  <a href="" class="card-link">
+                  <a href="/device" class="card-link" hasListen='false'>
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">device status</div>
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1" id="device-status">device status</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800 text-uppercase">disconnected</div>
                       </div>
                       <div class="col-auto">
@@ -351,10 +351,10 @@
               <div class="col-xl-6 col-md-12 mb-4">
                 <div class="card border-left-success shadow h-100 py-2">
                   <div class="card-body">
-                    <a href="/hub" class="card-link">
+                    <a href="/hub" class="card-link" hasListen='false'>
                       <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                          <div class="text-xs font-weight-bold text-success text-uppercase mb-1">speed</div>
+                          <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Leaves</div>
                           <div class="h5 mb-0 font-weight-bold text-gray-800 text-uppercase">0</div>
                         </div>
                         <div class="col-auto">
@@ -376,6 +376,109 @@
                     <span class="d-block"></span>
                     <span class="d-block">asfasfasfasfas</span>
                     <span class="d-block">asfasfasfasfas</span> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+  </script>
+
+
+  <script id="device-template" type="text/x-handlebars-template">
+    <div class="container-fluid mt-5">
+      <!-- Page Heading -->
+      <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h1 mb-0 text-gray-800" >Device Status</h1>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 d-none d-lg-block py-3 px-3">
+          <img src="img/tags-solid.svg" class="mt-5 pt-5"/>
+        </div>
+        <div class="col-lg-8 col-md-12">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xl-6 col-md-12 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                  <div class="card-body">
+                    <a href="/device" class="card-link" hasListen='false'>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" id="device-status">Device status</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800 text-uppercase">disonnected</div>
+                        </div>
+                        <div class="col-auto">
+                          <i class="fas fa-plug fa-2x text-gray-300"></i>
+                        </div>
+                      </div>
+        
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-6 col-md-12 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                  <div class="card-body">
+                    <a href="/device" class="card-link" hasListen='false'>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-success text-uppercase mb-1" id="deviceLastTime">Time</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800 text-uppercase">0</div>
+                        </div>
+                        <div class="col-auto">
+                          <i class="fas fa-plug fa-2x text-gray-300"></i>
+                        </div>
+                      </div>
+        
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-6 col-md-12 mb-4">
+                <div class="card border-left-danger shadow h-100 py-2">
+                  <div class="card-body">
+                    <a href="/device" class="card-link" hasListen='false'>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">PositionX</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800 text-uppercase">0</div>
+                        </div>
+                        <div class="col-auto">
+                          <i class="fas fa-plug fa-2x text-gray-300"></i>
+                        </div>
+                      </div>
+        
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-6 col-md-12 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                  <div class="card-body">
+                    <a href="/device" class="card-link" hasListen='false'>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">PositionY</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800 text-uppercase">0</div>
+                        </div>
+                        <div class="col-auto">
+                          <i class="fas fa-plug fa-2x text-gray-300"></i>
+                        </div>
+                      </div>
+        
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div> 
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body overflow-auto log-view" id="log-box">
                   </div>
                 </div>
               </div>
