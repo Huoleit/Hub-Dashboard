@@ -11,6 +11,7 @@ const redis = new Redis('redis://127.0.0.1:6379');
 const router = express.Router();
 
 const port = process.env.SERVER_PORT || 8000;
+var progress_global = 0;
 class Device{
     static get OFF() { return 'disconnected'};
     static get ON() { return 'connected'};
@@ -70,7 +71,7 @@ router.route('/hubinfo')
     hub.set_status(Device.ON);
     hub.set_info(req.body);
     // console.log(req.body);
-    res.json({data:req.body.status});
+    res.json({data:req.body.status,progress:progress_global});
 });
 router.route('/deviceinfo')
 .post(async (req,res) => { 
@@ -193,6 +194,7 @@ const update_progress = async ()=>{
         if(progress > 100) progress = 100;
         else if(progress < 0) progress = 0;
     }
+    progress_global = progress;
     console.log(JSON.stringify(schema) + goal_time +"  "+done_time+"  "+progress);
     io.emit('update_progress', progress);
     io.emit('update_chart', activeTimeObj);

@@ -50,7 +50,7 @@ const createBarChart = (ctx) => {
       backgroundColor: "#4e73df",
       hoverBackgroundColor: "#2e59d9",
       borderColor: "#4e73df",
-      data: [1000, 0, 0, 0, 0, 0],
+      data: [0, 0, 0, 0, 0, 0],
     }],
   },
   options: {
@@ -80,7 +80,7 @@ const createBarChart = (ctx) => {
       yAxes: [{
         ticks: {
           min: 0,
-          max: 3000,
+          max: 500,
           maxTicksLimit: 5,
           padding: 10,
           // Include a dollar sign in the ticks
