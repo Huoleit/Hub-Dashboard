@@ -98,6 +98,25 @@ router.route('/record')
     res.json({status:'OK', method:'GET'});
 });
 
+router.route('/config')
+.post(async (req,res) => { 
+    
+    console.log(req.body);
+    let action = "rpop";
+    if (req.body.rpop)
+    {
+        redis.rpop('records');
+        action = "rpop";
+    }
+    else if(req.body.del)
+    {
+        redis.del('records');
+        action = "del";
+    }
+    res.json({action:action});
+
+});
+
 router.route('/goal')
 .post(async (req,res) => { 
     
