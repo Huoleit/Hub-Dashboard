@@ -30,7 +30,7 @@ After installation, run `npm install` and then run `npm start` which will open u
 
 You must have npm installed globally in order to use this build environment. This theme was built using node v11.6.0 and the Gulp CLI v2.0.1. If Gulp is not running properly after running `npm install`, you may need to update node and/or the Gulp CLI locally.
 
-##Built with
+## Built with
 - Express.js - A web framework 
 - Vanilla.js - Single-page Application Router
 - Handlebars - A simple templating language
