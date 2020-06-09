@@ -3,9 +3,10 @@
     "name": "tree",
     "version": "1.0.0",
     "scripts": {
-        "start": "node_modules/.bin/gulp watch"
+        "start": "node_modules/.bin/gulp watch",
+        "server": "node server.js"
     },
-    "description": "An open source Bootstrap 4 admin theme.",
+    "description": "Dashboard",
     "keywords": [
         "css",
         "sass",
