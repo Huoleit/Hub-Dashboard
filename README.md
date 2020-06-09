@@ -41,17 +41,17 @@ You must have npm installed globally in order to use this build environment. Thi
 
 - API
   > All APIs start with the prefix `/api` and it will be omitted for routes below. For example,`/hubinfo` stands for `HOST_NAME/api/hubinfo`.
-  - `/hubinfo` **POST**
+  - `/hubinfo` **POST**\
   The heartbeat of the hub will be sent to this route in a fixed time interval to acknowledge its connection status. And the current progress will be sent back as the response
-  - `/deviceinfo` **POST**
+  - `/deviceinfo` **POST**\
   Heartbeat of an accessory
-  - `/record` **GET**
+  - `/record` **GET**\
   Retrieving all exercise records stored in database
-  - `/record` **POST**
+  - `/record` **POST**\
   Uploading a record to the server
-  - `/config` **POST**
+  - `/config` **POST**\
   Posting a specific JSON to this route will perform either detaching the latest record or deleting all records
-  - `/goal` **POST**
+  - `/goal` **POST**\
   Uploading the customized exercise plan to the server
 
 ## Built with
