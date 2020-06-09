@@ -6,3 +6,4 @@ public/vendor
 .DS_Store
 hub.py
 public/buttons.html
+.env
