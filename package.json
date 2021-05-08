@@ -35,7 +35,7 @@
         "gulp-concat": "^2.6.1",
         "gulp-nodemon": "^2.4.2",
         "gulp-replace": "^1.0.0",
-        "handlebars": "^4.7.2",
+        "handlebars": "^4.7.7",
         "ioredis": "^4.14.1",
         "jquery": "3.5.0",
         "jquery.easing": "^1.4.1",
