@@ -30,7 +30,7 @@
         "chart.js": "2.8.0",
         "datatables.net-bs4": "1.10.19",
         "dotenv": "^8.2.0",
-        "express": "^4.17.1",
+        "express": "^4.17.3",
         "faker": "^4.1.0",
         "gulp-concat": "^2.6.1",
         "gulp-nodemon": "^2.4.2",
